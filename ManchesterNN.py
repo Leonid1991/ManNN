@@ -16,25 +16,30 @@ train_size = int(train_proportion * len(data))
 test_size  = len(data) - train_size
 train_data, test_data = data.iloc[:train_size,:], data.iloc[train_size:,:]
 # Splitting in y and x for simplicity
-(x_train, y_train) = train_data.iloc[:, 5:].values, train_data.iloc[:, 2].values
-(x_test, y_test)   = test_data.iloc[:, 5:].values, test_data.iloc[:, 2].values
+(x_train, y_train) = train_data.iloc[:, 3:].values, train_data.iloc[:, 2].values
+(x_test, y_test)   = test_data.iloc[:, 3:].values, test_data.iloc[:, 2].values
 x_train, x_test = x_train.astype('float32'), x_test.astype('float32')
 # Data assesment for future unification (0 in x axis means that we consider every column separately)
 mean = x_train.mean(axis=0) # mean value
 std = x_train.std(axis=0)   # standard diviation
-# Making the data unification
-x_train -= mean
-x_train /= std
-x_test -= mean
-x_test /= std
+# Making the data unification (except the already unified ones)
+x_train[:,0] -= mean[0]
+x_train[:,0] /= std[0]
+x_train[:,:-2] -= mean[:-2]
+x_train[:,:-2] /= std[:-2]
+
+x_test[:,0] -= mean[0]
+x_test[:,0] /= std[0]
+x_test[:,:-2] -= mean[:-2]
+x_test[:,:-2] /= std[:-2]
 # Categories (# 2 categories yes/no)
 y_train, y_test  =  utils.to_categorical(y_train, 2), utils.to_categorical(y_test , 2)
 classes = ['not having Myopia','having Myopia']
 # Creation NN
 model = Sequential() # classic, layer-by-layer model type
-model.add(Dense(x_test.shape[1], activation='relu', input_shape=(x_train.shape[1],))) # 13 is due to the number of initial parameters columns
-model.add(Dense(2, activation="softmax", kernel_initializer="normal"))               # yes/no
-model.compile(loss="categorical_crossentropy", optimizer="SGD", metrics=["accuracy"])# some random optimization routine
+model.add(Dense(x_test.shape[1], activation='relu', input_shape=(x_train.shape[1],))) # 15 is due to the number of initial parameters columns
+model.add(Dense(2, activation="softmax", kernel_initializer="normal"))                # yes/no
+model.compile(loss="categorical_crossentropy", optimizer="SGD", metrics=["accuracy"]) # some random optimization routine
 # Training procedure
 model.fit(x_train, y_train, batch_size=20, epochs=20, validation_split = valid_proportion, verbose=1)
 # Model evaluation

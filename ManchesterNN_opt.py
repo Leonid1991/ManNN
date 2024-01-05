@@ -19,17 +19,22 @@ train_size = int(train_proportion * len(data))
 test_size  = len(data) - train_size
 train_data, test_data = data.iloc[:train_size,:], data.iloc[train_size:,:]
 # Splitting in y and x for simplicity
-(x_train, y_train) = train_data.iloc[:, 5:].values, train_data.iloc[:, 2].values
-(x_test, y_test)   = test_data.iloc[:, 5:].values, test_data.iloc[:, 2].values
+(x_train, y_train) = train_data.iloc[:, 3:].values, train_data.iloc[:, 2].values
+(x_test, y_test)   = test_data.iloc[:, 3:].values, test_data.iloc[:, 2].values
 x_train, x_test = x_train.astype('float32'), x_test.astype('float32')
 # Data assesment for future unification (0 in x axis means that we consider every column separately)
 mean = x_train.mean(axis=0) # mean value
 std = x_train.std(axis=0)   # standard diviation
-# Making the data unification
-x_train -= mean
-x_train /= std
-x_test -= mean
-x_test /= std
+# Making the data unification (except the already unified ones)
+x_train[:,0] -= mean[0]
+x_train[:,0] /= std[0]
+x_train[:,:-2] -= mean[:-2]
+x_train[:,:-2] /= std[:-2]
+
+x_test[:,0] -= mean[0]
+x_test[:,0] /= std[0]
+x_test[:,:-2] -= mean[:-2]
+x_test[:,:-2] /= std[:-2]
 # Categories (# 2 categories yes/no)
 y_train, y_test  =  utils.to_categorical(y_train, 2), utils.to_categorical(y_test , 2)
 classes = ['not having Myopia','having Myopia']
@@ -38,8 +43,8 @@ def build_model(hp):
     model = Sequential()
     activation_choice = hp.Choice('activation', values=['relu', 'sigmoid', 'tanh', 'elu', 'selu'])
     model.add(Dense(units=hp.Int('units_input',
-                                   min_value=x_test.shape[1],   # min neuron number - 13
-                                   max_value=10*x_test.shape[1],# max neuron number - 130
+                                   min_value=x_test.shape[1],   # min neuron number - 15
+                                   max_value=10*x_test.shape[1],# max neuron number - 150
                                    step=32),
                     input_dim=x_test.shape[1],
                     activation=activation_choice))
