@@ -46,7 +46,7 @@ model.fit(x_train, y_train, batch_size=20, epochs=20, validation_split = valid_p
 scores = model.evaluate(x_test, y_test, verbose=0)
 print("Accuracy of NN:", (scores[1]*100))
 # Prediction (local/some cases) of # ith case
-prediction = model.predict(x_test) # usage of the train parameters
+prediction = model.predict(x_test) # usage of the test parameters
 i = -1
 print("Considered case, i = ",i)
 print("Predicted value",np.argmax(prediction[i]))
