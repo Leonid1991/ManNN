@@ -2,7 +2,7 @@
 
 These programs are to demonstrate my abilities to solve classification problems given by Manchester Uni. with NN.
 
-It has three distinct parts: Myopia, papila, PAPILA & TREND problems.
+It has three distinct parts: Myopia, PAPILA & TREND problems.
 Links : 
 	Myopia - https://shorturl.at/ASTY5
  	PAPILA - https://figshare.com/articles/dataset/PAPILA/14798004/1
