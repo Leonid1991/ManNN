@@ -3,6 +3,10 @@
 These programs are to demonstrate my abilities to solve classification problems given by Manchester Uni. with NN.
 
 It has three distinct parts: Myopia, papila, PAPILA & TREND problems.
+Links : 
+	Myopia - https://shorturl.at/ASTY5
+ 	PAPILA - https://figshare.com/articles/dataset/PAPILA/14798004/1
+  	TREND  - https://zenodo.org/records/4521044
 
   Myopia problem (finished):
     ManchesterNN.py is a simple NN without any hidden layer based on data in Myopia_Data.xlsx
