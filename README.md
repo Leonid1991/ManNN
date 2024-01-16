@@ -15,9 +15,9 @@ Links :
   PAPILA (not finished):
       UutilsProv.py is a file provided by authors for easier operation.   
       PAPilaMamchester.py gives a simple NN to operate with it.
+      
   TREND (not finished):
-    Here are two possible ways to work with the problem ():
- 
+    Here are two possible ways to work with the problem :  
     1. Using only files attributed to young people and their separation into healthy and obesity groups
     2. Combination of young and old to find their differences.
 	 Note! It is a small number of files, especially for older people. To resolve it, the file extensionDataset.py was added. 
