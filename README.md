@@ -16,4 +16,5 @@ Links :
     1. Using only files attributed to young people and their separation into healthy and obesity groups
     2. Combination of young and old to find their differences.
 	 Note! It is a small number of files, especially for older people. To resolve it, the file extensionDataset.py was added. 
-   	 To create additional folders and separate extended dataset dataPreparation.py was added. 
+
+Additional. As a part of the work, training with Streamlit was add 
